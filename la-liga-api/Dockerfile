@@ -1,26 +1,17 @@
-# Usa la imagen oficial de Go para compilar la aplicación
+# Usa una imagen base de Go
 FROM golang:1.20-alpine AS builder
 
-# Establece el directorio de trabajo
+# Crea y establece el directorio de trabajo
 WORKDIR /app
 
-# Copia los archivos del proyecto en el contenedor
+# Copia los archivos del proyecto al contenedor
 COPY . .
 
-# Descarga las dependencias del proyecto
-RUN go mod tidy
-
-# Compila la aplicación Go
+# Compila la aplicación
 RUN go build -o main .
 
-# Usa una imagen más ligera para el contenedor final
-FROM alpine:latest
-
-# Copia el binario compilado desde la etapa de construcción
-COPY --from=builder /app/main /main
-
-# Expón el puerto 8080
+# Expone el puerto que usará la aplicación
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación
-CMD ["/main"]
+# Ejecuta el archivo binario principal
+CMD ["./main"]

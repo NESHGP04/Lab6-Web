@@ -25,7 +25,7 @@ var db *sql.DB
 
 func main() {
 	var err error
-	db, err = sql.Open("postgres", "user=postgres password=yourpassword dbname=la_liga sslmode=disable")
+	db, err = sql.Open("postgres", "user=postgres password=74200474M dbname=la_liga sslmode=disable")
 	if err != nil {
 		log.Fatalf("❌ Error conectando a la base de datos: %v", err)
 	}
